@@ -129,4 +129,6 @@ public class RestClientOptions {
     /// This properly allows to override the default behavior.
     /// </summary>
     public bool AllowMultipleDefaultParametersWithSameName { get; set; }
+
+    public bool OnlyRawData { get; set; }
 }

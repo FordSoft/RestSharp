@@ -66,6 +66,7 @@ public class RestResponse : RestResponseBase {
         Encoding                encoding,
         CookieCollection        cookieCollection,
         CalculateResponseStatus calculateResponseStatus,
+        bool                    onlyRawData,
         CancellationToken       cancellationToken
     ) {
         return request.AdvancedResponseWriter?.Invoke(httpResponse) ?? await GetDefaultResponse().ConfigureAwait(false);
@@ -79,7 +80,7 @@ public class RestResponse : RestResponseBase {
 #endif
 
             var bytes   = stream == null ? null : await stream.ReadAsBytes(cancellationToken).ConfigureAwait(false);
-            var content = bytes  == null ? null : httpResponse.GetResponseString(bytes, encoding);
+            var content = onlyRawData || bytes  == null ? null : httpResponse.GetResponseString(bytes, encoding);
 
             return new RestResponse {
                 Content           = content,

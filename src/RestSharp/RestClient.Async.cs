@@ -34,6 +34,7 @@ public partial class RestClient {
                     Options.Encoding,
                     CookieContainer.GetCookies(internalResponse.Url),
                     CalculateResponseStatus,
+                    Options.OnlyRawData,
                     cancellationToken
                 )
                 .ConfigureAwait(false)
